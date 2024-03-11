@@ -26,7 +26,7 @@ public class SampleController {
     }
 
     @GetMapping({"/ex2"})
-    public void exModel(Model model) {
+    public void exModel1(Model model) {
         List<SampleDTO> list = IntStream.rangeClosed(1,20).asLongStream().
                 mapToObj(i-> {
                             SampleDTO Dto = SampleDTO.builder()
@@ -63,5 +63,21 @@ public class SampleController {
     @GetMapping("/ex3")
     public void ex3() {
         log.info("ex3");
+    }
+
+    @GetMapping({"/ex2", "exLink"})
+    public void exModel2(Model model) {
+        List<SampleDTO> sampleDTOList = IntStream.rangeClosed(1,10).asLongStream()
+                .mapToObj( i -> {
+                    SampleDTO dto = SampleDTO.builder()
+                            .sno(i)
+                            .first("처음 .." + i)
+                            .last("마지막.." + i)
+                            .regTime(LocalDateTime.now())
+                            .build();
+                    return dto;
+                }).collect(Collectors.toList());
+
+        model.addAttribute("sampleDTOList", sampleDTOList);
     }
 }
