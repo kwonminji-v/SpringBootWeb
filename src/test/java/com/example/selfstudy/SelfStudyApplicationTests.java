@@ -25,10 +25,7 @@ class SelfStudyApplicationTests {
 
     @Test
     public void getselectQuery() {
-
-
         List<Memo> memo = memoRepository.getListdesc();
-
         System.out.println(memo);
 
     }
